@@ -1,6 +1,6 @@
-package br.com.williamfranco.httpktor.src.features.settings.view_models
+package br.com.williamfranco.httpktorkmm.features.settings.view_models
 
-import br.com.williamfranco.httpktor.src.features.settings.models.*
+import br.com.williamfranco.httpktorkmm.features.settings.models.ThemeModel
 
 import kotlinx.coroutines.flow.*
 

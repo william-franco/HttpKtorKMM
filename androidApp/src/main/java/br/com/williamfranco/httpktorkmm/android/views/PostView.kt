@@ -1,28 +1,23 @@
-package br.com.williamfranco.httpktorkmm.android.Views
+package br.com.williamfranco.httpktorkmm.android.views
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
-import br.com.williamfranco.httpktorkmm.features.posts.models.PostModel
-import br.com.williamfranco.httpktorkmm.features.posts.view_models.PostViewModel
+import br.com.williamfranco.httpktorkmm.features.posts.models.*
+import br.com.williamfranco.httpktorkmm.features.posts.view_models.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PostView(viewModel: PostViewModel) {
+fun PostView(navController: NavController, viewModel: PostViewModel) {
     val postsState by viewModel.posts.collectAsState()
     val isLoadingState by viewModel.isLoading.collectAsState()
 
@@ -37,6 +32,11 @@ fun PostView(viewModel: PostViewModel) {
                         onClick = { viewModel.refreshPosts() }
                     ) {
                         Icon(Icons.Default.Refresh, contentDescription = "Refresh")
+                    }
+                    IconButton(
+                        onClick = { navController.navigate("settingView") }
+                    ) {
+                        Icon(Icons.Default.Settings, contentDescription = "Settings")
                     }
                 }
             )
@@ -64,7 +64,7 @@ fun PostView(viewModel: PostViewModel) {
 }
 
 @Composable
-fun PostList(posts: List<PostModel>) {
+private fun PostList(posts: List<PostModel>) {
     LazyColumn {
         items(posts) { post ->
             Column(
